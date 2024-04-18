@@ -23,6 +23,18 @@
             "version": "9"
         }
     },
+    "supplier": {
+        "name": "SBOM STRATEGIES",
+        "url": [
+            "https://usingopensource.com"
+        ],
+        "contact": [
+            {
+                "name": "SBOM STRATEGIES",
+                "email": "support@usingopensource.com"
+            }
+        ]
+    },
     "components": [
         {
             "bom-ref": "pkg:rpm/rocky/alternatives@1.24-1.el9?arch=aarch64&upstream=chkconfig-1.24-1.el9.src.rpm&distro=rocky-9.3&package-id=2704d9e5aa808ab5",
