@@ -1,0 +1,49 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "name": "BERT NLP Model",
+      "version": "1.2.0",
+      "type": "library",
+      "properties": [
+        { "name": "framework", "value": "PyTorch" },
+        { "name": "learning_rate", "value": "0.001" },
+        { "name": "epochs", "value": "10" }
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "numpy",
+      "version": "1.21.0",
+      "type": "library",
+      "licenses": [{ "license": { "name": "BSD-3-Clause" } }]
+    },
+    {
+      "name": "IMDB_reviews",
+      "type": "data",
+      "properties": [
+        { "name": "license", "value": "CC BY 4.0" },
+        { "name": "source", "value": "public" },
+        { "name": "preprocessing", "value": "tokenization, lowercasing" }
+      ]
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "id": "CVE-2023-12345",
+      "source": { "name": "NVD" },
+      "references": [{ "id": "CVE-2023-12345", "source": "NVD" }]
+    }
+  ],
+  "services": [
+    {
+      "name": "Docker Runtime",
+      "properties": [
+        { "name": "image", "value": "pytorch/pytorch:1.2-cuda10.0-cudnn7" }
+      ]
+    }
+  ]
+}
