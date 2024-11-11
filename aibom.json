@@ -3,33 +3,56 @@
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
   "version": 1,
-  "serialNumber": "urn:uuid:27c94e32-49f3-4bde-9afc-e62154174e88",
+  "serialNumber": "urn:uuid:generic-uuid-0000-0000-0000-000000000000",
   "metadata": {
     "timestamp": "2024-11-11T10:00:00Z",
     "authors": [
       {
-        "name": "John Doe",
-        "email": "johndoe@example.com",
-        "organization": "AI Systems Ltd."
+        "name": "Jane Smith",
+        "email": "janesmith@example.com",
+        "organization": "Example AI Company"
       }
     ],
     "component": {
-      "name": "BERT NLP Model",
-      "version": "1.2.0",
+      "name": "Example NLP Model",
+      "version": "1.0.0",
       "type": "library",
       "supplier": {
-        "name": "AI Systems Ltd.",
-        "url": "https://aisystems.example.com"
+        "name": "Example AI Company",
+        "url": "https://example-ai.com"
       },
-      "purl": "pkg:docker/pytorch/bert_nlp_model@1.2.0",
+      "purl": "pkg:docker/example/ai_nlp_model@1.0.0",
       "properties": [
         { "name": "framework", "value": "PyTorch" },
-        { "name": "training_date", "value": "2024-10-01" },
+        { "name": "training_date", "value": "2024-01-01" },
         { "name": "training_source", "value": "internal" },
-        { "name": "inference_requirements", "value": "{ 'gpu': 'NVIDIA V100', 'ram': '16GB' }" }
+        { "name": "inference_requirements", "value": "{ 'gpu': 'NVIDIA V100', 'ram': '16GB' }" },
+        { "name": "training_data_source", "value": "proprietary data" },
+        { "name": "bias_mitigation_steps", "value": "Balanced data across gender and age" },
+        { "name": "audit_trail", "value": "2024-01-15: Initial training; 2024-02-20: Retraining" },
+        { "name": "performance_metrics", "value": "accuracy: 0.92, f1_score: 0.89" },
+        { "name": "explainability", "value": "SHAP for model transparency" },
+        { "name": "lifecycle_stage", "value": "Production" },
+        { "name": "compliance_notes", "value": "EU AI Act, GDPR compliant" },
+        { "name": "threat_model", "value": "Mitigated data poisoning, adversarial attacks" },
+        { "name": "supply_chain_provenance", "value": "Signed in CI/CD pipeline" }
       ]
     }
   },
+  "signature": [
+    {
+      "keyId": "cosign.pub",
+      "algorithm": "SHA-256",
+      "value": "<base64-encoded-signature>",
+      "type": "ED25519",
+      "validFrom": "2024-11-11T10:00:00Z",
+      "validUntil": "2025-11-11T10:00:00Z",
+      "signedBy": {
+        "name": "Sigstore",
+        "url": "https://sigstore.dev"
+      }
+    }
+  ],
   "components": [
     {
       "name": "numpy",
@@ -48,52 +71,27 @@
       ]
     },
     {
-      "name": "Purldb",
+      "name": "ExampleDB",
       "version": "1.0.0",
       "type": "library",
       "supplier": {
-        "name": "aboutcode-org",
-        "url": "https://aboutcode.org/"
+        "name": "Example Code Org",
+        "url": "https://examplecode.org/"
       },
-      "purl": "pkg:github/aboutcode-org/purldb@1.0.0",
-      "description": "A database of package metadata with PURLs as first-class citizens, supporting AI component tracking.",
-      "repository": "https://github.com/aboutcode-org/purldb"
-    },
-    {
-      "name": "Purl2CPE",
-      "version": "1.0.0",
-      "type": "library",
-      "supplier": {
-        "name": "SCANOSS",
-        "url": "https://scanoss.com/"
-      },
-      "purl": "pkg:github/scanoss/purl2cpe@1.0.0",
-      "description": "A dataset mapping PURLs to Common Platform Enumerations (CPEs), useful for AI security research.",
-      "repository": "https://github.com/scanoss/purl2cpe"
-    },
-    {
-      "name": "Purldb-Data",
-      "version": "1.0.0",
-      "type": "data",
-      "supplier": {
-        "name": "aboutcode-org",
-        "url": "https://aboutcode.org/"
-      },
-      "purl": "pkg:github/aboutcode-org/purldb-data@1.0.0",
-      "description": "A dataset of PURLs for offline lookup and verification, supporting AI model dependency tracking.",
-      "repository": "https://github.com/aboutcode-org/purldb-data"
+      "purl": "pkg:github/examplecode-org/exampledb@1.0.0",
+      "description": "Database for package metadata with PURLs, supports AI tracking.",
+      "repository": "https://github.com/examplecode-org/exampledb"
     }
   ],
   "dependencies": [
     {
-      "ref": "sbom+15199/aibom(3)$1731354331999",
       "dependsOn": [
-        "pkg:github/aboutcode-org/purldb@1.0.0",
+        "pkg:github/examplecode-org/exampledb@1.0.0",
         "pkg:pypi/numpy@1.21.0"
       ]
     },
     {
-      "ref": "pkg:github/aboutcode-org/purldb@1.0.0"
+      "ref": "pkg:github/examplecode-org/exampledb@1.0.0"
     },
     {
       "ref": "pkg:pypi/numpy@1.21.0"
@@ -131,27 +129,11 @@
       "cwes": [
         697
       ],
-      "description": "An incomplete string comparison in the numpy.core component in NumPy before 1.22.0 allows attackers to trigger slightly incorrect copying by constructing specific string objects. NOTE: the vendor states that this reported code behavior is 'completely harmless.'",
-      "recommendation": "Upgrade dependency numpy from version 1.21.0 to 1.22.0 to mitigate all existing vulnerabilities.",
+      "description": "An incomplete string comparison in numpy allows incorrect copying.",
+      "recommendation": "Upgrade numpy from 1.21.0 to 1.22.0 to mitigate vulnerabilities.",
       "advisories": [
-        {
-          "url": "https://github.com/numpy/numpy/issues/18993"
-        },
-        {
-          "url": "https://github.com/advisories/GHSA-fpfv-jqm9-f5jm"
-        },
-        {
-          "url": "https://www.oracle.com/security-alerts/cpujul2022.html"
-        },
-        {
-          "url": "https://github.com/numpy/numpy/issues/18993#issuecomment-1010735102"
-        },
-        {
-          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/numpy/PYSEC-2021-855.yaml"
-        },
-        {
-          "url": "https://pypi.org/project/numpy/"
-        }
+        { "url": "https://github.com/numpy/numpy/issues/18993" },
+        { "url": "https://github.com/advisories/GHSA-fpfv-jqm9-f5jm" }
       ],
       "published": "2021-12-17T19:15:00.000Z",
       "affects": [
