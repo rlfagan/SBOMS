@@ -9,8 +9,9 @@
       "type": "library",
       "properties": [
         { "name": "framework", "value": "PyTorch" },
-        { "name": "learning_rate", "value": "0.001" },
-        { "name": "epochs", "value": "10" }
+        { "name": "training_date", "value": "2024-10-01" },
+        { "name": "training_source", "value": "internal" },
+        { "name": "inference_requirements", "value": "{ 'gpu': 'NVIDIA V100', 'ram': '16GB' }" }
       ]
     }
   },
@@ -19,7 +20,12 @@
       "name": "numpy",
       "version": "1.21.0",
       "type": "library",
-      "licenses": [{ "license": { "name": "BSD-3-Clause" } }]
+      "licenses": [{ "license": { "name": "BSD-3-Clause" } }],
+      "properties": [
+        { "name": "sensitivity", "value": "public" },
+        { "name": "data_collection_period", "value": "2022-01 to 2022-06" },
+        { "name": "ethics_and_bias_notes", "value": "Balanced across age groups" }
+      ]
     },
     {
       "name": "IMDB_reviews",
@@ -27,7 +33,8 @@
       "properties": [
         { "name": "license", "value": "CC BY 4.0" },
         { "name": "source", "value": "public" },
-        { "name": "preprocessing", "value": "tokenization, lowercasing" }
+        { "name": "preprocessing", "value": "tokenization, lowercasing" },
+        { "name": "dataset_version", "value": "2.0" }
       ]
     }
   ],
@@ -35,14 +42,51 @@
     {
       "id": "CVE-2023-12345",
       "source": { "name": "NVD" },
-      "references": [{ "id": "CVE-2023-12345", "source": "NVD" }]
+      "references": [{ "id": "CVE-2023-12345", "source": "NVD" }],
+      "affects": [
+        {
+          "ref": "numpy",
+          "properties": [
+            { "name": "exploitability_status", "value": "Exploitable" },
+            { "name": "impact_assessment", "value": "Could allow unauthorized access to training data" },
+            { "name": "mitigation_status", "value": "Updated to numpy 1.22.0" }
+          ]
+        }
+      ]
     }
   ],
   "services": [
     {
       "name": "Docker Runtime",
       "properties": [
-        { "name": "image", "value": "pytorch/pytorch:1.2-cuda10.0-cudnn7" }
+        { "name": "image", "value": "pytorch/pytorch:1.2-cuda10.0-cudnn7" },
+        { "name": "carbon_footprint_estimate", "value": "0.2 metric tons CO2" },
+        { "name": "energy_usage", "value": "150 kWh" },
+        { "name": "compute_resources", "value": "NVIDIA GPU with CUDA support" }
+      ]
+    }
+  ],
+  "dependencies": [
+    { "ref": "numpy", "dependsOn": ["IMDB_reviews"] }
+  ],
+  "compliance": {
+    "audit_trails": [
+      { "timestamp": "2024-01-15", "description": "GDPR review passed" }
+    ],
+    "properties": [
+      { "name": "explainability_score", "value": "high" },
+      { "name": "usage_limitations", "value": "Not for use in critical medical applications" }
+    ]
+  },
+  "vex": [
+    {
+      "status": "Fixed",
+      "component_affected": "numpy",
+      "properties": [
+        { "name": "exploitability_indicators", "value": "Low exploitability due to model input validation" },
+        { "name": "remediation_date", "value": "2024-10-05" },
+        { "name": "response_action", "value": "Dependency update" },
+        { "name": "vex_justification", "value": "Remediated in latest dependency update" }
       ]
     }
   ]
