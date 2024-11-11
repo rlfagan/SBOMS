@@ -2,11 +2,25 @@
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
   "version": 1,
+  "serialNumber": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
   "metadata": {
+    "timestamp": "2024-11-11T10:00:00Z",
+    "authors": [
+      {
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "organization": "AI Systems Ltd."
+      }
+    ],
     "component": {
       "name": "BERT NLP Model",
       "version": "1.2.0",
       "type": "library",
+      "supplier": {
+        "name": "AI Systems Ltd.",
+        "url": "https://aisystems.example.com"
+      },
+      "purl": "pkg:docker/pytorch/bert_nlp_model@1.2.0",
       "properties": [
         { "name": "framework", "value": "PyTorch" },
         { "name": "training_date", "value": "2024-10-01" },
@@ -20,6 +34,11 @@
       "name": "numpy",
       "version": "1.21.0",
       "type": "library",
+      "supplier": {
+        "name": "NumPy Project",
+        "url": "https://numpy.org/"
+      },
+      "purl": "pkg:pypi/numpy@1.21.0",
       "licenses": [{ "license": { "name": "BSD-3-Clause" } }],
       "properties": [
         { "name": "sensitivity", "value": "public" },
@@ -29,13 +48,24 @@
     },
     {
       "name": "IMDB_reviews",
+      "version": "2.0",
       "type": "data",
+      "supplier": {
+        "name": "Open Dataset Provider",
+        "url": "https://opendatasetprovider.com"
+      },
+      "purl": "pkg:generic/IMDB_reviews@2.0",
       "properties": [
         { "name": "license", "value": "CC BY 4.0" },
         { "name": "source", "value": "public" },
-        { "name": "preprocessing", "value": "tokenization, lowercasing" },
-        { "name": "dataset_version", "value": "2.0" }
+        { "name": "preprocessing", "value": "tokenization, lowercasing" }
       ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/numpy@1.21.0",
+      "dependsOn": ["pkg:generic/IMDB_reviews@2.0"]
     }
   ],
   "vulnerabilities": [
@@ -45,7 +75,7 @@
       "references": [{ "id": "CVE-2023-12345", "source": "NVD" }],
       "affects": [
         {
-          "ref": "numpy",
+          "ref": "pkg:pypi/numpy@1.21.0",
           "properties": [
             { "name": "exploitability_status", "value": "Exploitable" },
             { "name": "impact_assessment", "value": "Could allow unauthorized access to training data" },
@@ -63,30 +93,6 @@
         { "name": "carbon_footprint_estimate", "value": "0.2 metric tons CO2" },
         { "name": "energy_usage", "value": "150 kWh" },
         { "name": "compute_resources", "value": "NVIDIA GPU with CUDA support" }
-      ]
-    }
-  ],
-  "dependencies": [
-    { "ref": "numpy", "dependsOn": ["IMDB_reviews"] }
-  ],
-  "compliance": {
-    "audit_trails": [
-      { "timestamp": "2024-01-15", "description": "GDPR review passed" }
-    ],
-    "properties": [
-      { "name": "explainability_score", "value": "high" },
-      { "name": "usage_limitations", "value": "Not for use in critical medical applications" }
-    ]
-  },
-  "vex": [
-    {
-      "status": "Fixed",
-      "component_affected": "numpy",
-      "properties": [
-        { "name": "exploitability_indicators", "value": "Low exploitability due to model input validation" },
-        { "name": "remediation_date", "value": "2024-10-05" },
-        { "name": "response_action", "value": "Dependency update" },
-        { "name": "vex_justification", "value": "Remediated in latest dependency update" }
       ]
     }
   ]
